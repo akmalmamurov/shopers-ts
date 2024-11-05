@@ -4,6 +4,8 @@ import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
 import Button from "./Button";
 import { BannerData } from "../../type";
+import Link from "next/link";
+import FormattedPrice from "./FormattedPrice";
 
 const Banner = async () => {
   const banners = await getBannersData();
@@ -40,19 +42,33 @@ const Banner = async () => {
         />
       </div>
       {/* right*/}
-      <div>
+      <div className="flex flex-col space-y-5 md:space-y-10 h-auto md:max-h-[600px]">
         {banners.slice(1, 3).map((item: BannerData) => (
-          <div key={item?._id}>
-            <div>
+          <div
+            key={item?._id}
+            className="group h-full md:h-1/2 bg-bgLight rounded-lg overflow-hidden flex justify-center items-center p-5 "
+          >
+            <div className="w-1/2 flex flex-col">
               <div>
-                <p>{item?.title}</p>
+                <p className="text-2xl font-semibold">{item?.title}</p>
+                <p className="text-3xl font-semibold">{item?.subtitle}</p>
               </div>
+              <p className="mt-3 font-medium text-black/60">
+                From <FormattedPrice amount={item?.price} className="text-lightRed font-bold"/>
+              </p>
+              <Link
+                href={"/shop"}
+                className="mt-5 font-bold underline underline-offset-2 decoration-[1px] hover:text-lightRed hoverEffect"
+              >
+                Shop Now!
+              </Link>
             </div>
             <Image
               src={urlFor(item?.image).url()}
               alt={item?.title}
               width={500}
               height={500}
+              className="object-contain h-72 md:h-60 w-1/2 group-hover:scale-105 hoverEffect"
             />
           </div>
         ))}
