@@ -1,5 +1,5 @@
 import "../../globals.css";
-const RootLayout = ({ children }: { children: React.ReactNode }) => {
+const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <html lang="en">
       <body>{children}</body>
@@ -7,4 +7,4 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export default RootLayout;
+export default Layout;

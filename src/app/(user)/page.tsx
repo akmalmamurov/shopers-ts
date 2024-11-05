@@ -1,8 +1,10 @@
+import Banner from "@/components/Banner";
+import Container from "@/components/Container";
 
 export default function Home() {
   return (
-   <div>
-    <h1>Hello NEXTJS</h1>
-   </div>
+    <Container className="py-10">
+      <Banner/>
+    </Container>
   );
 }

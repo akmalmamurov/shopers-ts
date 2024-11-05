@@ -1,8 +1,8 @@
 import { defineField, defineType } from "sanity";
 
 export default defineType({
-  name: "banner",
-  title: "Banner",
+  name: "category",
+  title: "Category",
   type: "document",
   fields: [
     defineField({
@@ -10,16 +10,7 @@ export default defineType({
       title: "Title",
       type: "string",
     }),
-    defineField({
-      name: "subtitle",
-      title: "Subtitle",
-      type: "string",
-    }),
-    defineField({
-      name: "price",
-      title: "Starting From",
-      type: "number",
-    }),
+
     defineField({
       name: "description",
       title: "Description",
@@ -29,7 +20,7 @@ export default defineType({
       name: "image",
       title: "Image",
       type: "image",
-      description: "Banner Image",
+      description: "Category Image",
       validation: (rule) => rule.required(),
       options: {
         hotspot: true,
