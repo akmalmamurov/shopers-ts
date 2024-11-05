@@ -10,7 +10,6 @@ import FormattedPrice from "./FormattedPrice";
 const Banner = async () => {
   const banners = await getBannersData();
   const singleBanner = banners[0];
-  console.log(banners);
 
   return (
     <Container className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-10 md:max-h-[600px]">
@@ -54,7 +53,11 @@ const Banner = async () => {
                 <p className="text-3xl font-semibold">{item?.subtitle}</p>
               </div>
               <p className="mt-3 font-medium text-black/60">
-                From <FormattedPrice amount={item?.price} className="text-lightRed font-bold"/>
+                From{" "}
+                <FormattedPrice
+                  amount={item?.price}
+                  className="text-lightRed font-bold"
+                />
               </p>
               <Link
                 href={"/shop"}
