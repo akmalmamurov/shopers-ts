@@ -29,7 +29,7 @@ const ProductCard = ({ item }: { item: ProductData }) => {
               index < Math.ceil(item?.ratings);
             return (
               <MdStar
-                className={`${filled ? "text-[#fa8900]" : halfFilled ? "text-yellow-300" : "text-lightText"}`}
+                className={`${filled ? "text-[#fa8900]" : halfFilled ? "text-[#f7ca00]" : "text-lightText"}`}
                 key={index}
               />
             );
