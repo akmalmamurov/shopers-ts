@@ -51,3 +51,15 @@ export interface ProductData {
   position: string;
   rowprice: number;
 }
+interface UserInfo {
+  id: string;
+  name: string;
+  email: string;
+}
+export interface StoreState {
+  shoppers: {
+    cart: ProductData[];
+    wishList: ProductData[];
+    userInfo: UserInfo | null;
+  };
+}

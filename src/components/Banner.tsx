@@ -32,13 +32,16 @@ const Banner = async () => {
           </div>
           <Button className="w-36 text-sm py-2.5">Shop Now</Button>
         </div>
-        <Image
-          src={urlFor(singleBanner?.image).url()}
-          alt={singleBanner?.title}
-          width={500}
-          height={500}
-          className="object-contain h-72 md:h-full max-h-[600px] self-end group-hover:scale-105 hoverEffect"
-        />
+        <div className="w-[525px]">
+          <Image
+            src={urlFor(singleBanner?.image).url()}
+            alt={singleBanner?.title}
+            width={500}
+            height={500}
+            priority
+            className="object-contain w-auto h-72 md:h-full max-h-[600px] self-end group-hover:scale-105 hoverEffect"
+          />
+        </div>
       </div>
       {/* right*/}
       <div className="flex flex-col space-y-5 md:space-y-10 h-auto md:max-h-[600px]">
@@ -70,6 +73,7 @@ const Banner = async () => {
               src={urlFor(item?.image).url()}
               alt={item?.title}
               width={500}
+              priority
               height={500}
               className="object-contain h-72 md:h-60 w-1/2 group-hover:scale-105 hoverEffect"
             />

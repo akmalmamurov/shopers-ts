@@ -16,6 +16,7 @@ const ProductCard = ({ item }: { item: ProductData }) => {
             alt={item?.title}
             width={500}
             height={500}
+            loading="lazy"
             className="w-full h-72 object-cover group-hover:scale-105 hoverEffect"
           />
         </Link>
