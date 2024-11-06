@@ -4,6 +4,7 @@ import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
 import { MdStar } from "react-icons/md";
 import FormattedPrice from "./FormattedPrice";
+import AddToCartButton from "./AddToCartButton";
 
 const ProductCard = ({ item }: { item: ProductData }) => {
   return (
@@ -52,6 +53,7 @@ const ProductCard = ({ item }: { item: ProductData }) => {
           />
         </div>
       </div>
+      <AddToCartButton item={item} />
     </div>
   );
 };

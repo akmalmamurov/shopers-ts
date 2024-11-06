@@ -12,4 +12,8 @@ const bestSellersQuery = groq`*[_type == 'product' && 'position' == 'Best Seller
     ...
     }|order(_createdAt asc)`;
 
-export { bannerQuery, productsQuery, bestSellersQuery };
+const slugQuery = groq`*[_type == 'product' && slug.current == $slug][0]{
+        ...
+        }`;
+
+export { bannerQuery, productsQuery, bestSellersQuery, slugQuery };
