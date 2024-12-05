@@ -59,7 +59,8 @@ export const shoppersSlice = createSlice({
       const existingProduct = state.wishList.find(
         (item) => item._id === action.payload._id
       );
-
+      console.log(existingProduct);
+      
       state.wishList.push(action.payload);
     },
     resetWishList: (state) => {

@@ -5,7 +5,6 @@ import CartItem from "./CartItem";
 import toast from "react-hot-toast";
 import { resetCart } from "@/redux/shoppersSlice";
 import { motion } from "framer-motion";
-import Image from "next/image";
 import Link from "next/link";
 import FormattedPrice from "./FormattedPrice";
 import Button from "./Button";
