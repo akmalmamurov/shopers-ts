@@ -1,7 +1,12 @@
+import CartContainer from "@/components/CartContainer";
 import Container from "@/components/Container";
 
-const Cart = () => {
-  return <Container className="my-10">Cart</Container>;
+const CartPage = () => {
+  return (
+    <Container className="py-10">
+      <CartContainer />
+    </Container>
+  );
 };
 
-export default Cart;
+export default CartPage;

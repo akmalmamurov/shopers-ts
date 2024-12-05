@@ -7,7 +7,7 @@ import { HiMenuAlt2 } from "react-icons/hi";
 
 const Header = () => {
   return (
-    <header className="w-full h-20 bg-accentWhite border-b border-lightText/50">
+    <header className="w-full h-20 bg-accentWhite border-b border-lightText/50 sticky z-50 top-0">
       <Container className="h-full flex items-center justify-between gap-5 lg:gap-10">
         {/* logo */}
         <Logo />

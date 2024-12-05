@@ -15,7 +15,6 @@ import createWebStorage from "redux-persist/es/storage/createWebStorage";
 
 export function createPersistStorage(): WebStorage {
   const isServer = typeof window === "undefined";
-  // We will create dummy server
   if (isServer) {
     return {
       getItem() {
