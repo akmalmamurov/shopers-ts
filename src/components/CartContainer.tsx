@@ -8,7 +8,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import FormattedPrice from "./FormattedPrice";
 import Button from "./Button";
-const CartContainer = () => {
+const CartContainer = ({ session }: any) => {
   const { cart } = useSelector((state: StoreState) => state?.shoppers);
   const dispatch = useDispatch();
   const handleResetCart = () => {
@@ -17,6 +17,19 @@ const CartContainer = () => {
       dispatch(resetCart());
       toast.success("Cart reset successfully");
     }
+  };
+
+  const handleCheckout = async () => {
+    const response = await fetch("/api/checkout", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ items: cart, email: session?.user?.email }),
+    });
+    const result = await response.json();
+    console.log(result);
+    
   };
   return (
     <div>
@@ -53,9 +66,18 @@ const CartContainer = () => {
                   Total <FormattedPrice amount={250} />
                 </p>
               </div>
-              <Button disabled={false} className="py-3 px-8 rounded-md disabled:bg-darkOrange/40">
+              <Button
+                onClick={handleCheckout}
+                disabled={!session?.user}
+                className="py-3 px-8 rounded-md disabled:bg-darkOrange/40"
+              >
                 Proceed to Checkout
               </Button>
+              {!session?.user && (
+                <p className="text-center text-sm font-medium text-lightRed -mt-3">
+                  Please sign in to make Checkout
+                </p>
+              )}
             </div>
           </div>
         </div>
