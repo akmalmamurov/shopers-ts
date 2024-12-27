@@ -3,7 +3,7 @@
 import { resetCart } from "@/redux/shoppersSlice";
 import { StoreState } from "@/type";
 import { useSession } from "next-auth/react";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "./Loader";
 import { HiCheckCircle } from "react-icons/hi";
@@ -27,7 +27,7 @@ const SuccessContainer = ({ id }: Props) => {
     setTotalAmt(price);
   }, [cart]);
 
-  const handleSaveOrder = async () => {
+  const handleSaveOrder = useCallback(async () => {
     try {
       setLoading(true);
       const response = await fetch("/api/saveorder", {
@@ -38,26 +38,27 @@ const SuccessContainer = ({ id }: Props) => {
         body: JSON.stringify({
           cart,
           email: session?.user?.email,
-          id: id,
+          id,
           totalAmt,
         }),
       });
       const data = await response.json();
       if (data?.success) {
-        setLoading(false);
         dispatch(resetCart());
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     } finally {
       setLoading(false);
     }
-  };
+  }, [cart, session?.user?.email, id, totalAmt, dispatch]);
+
+  // handleSaveOrderni chaqirish uchun useEffect
   useEffect(() => {
     if (session?.user && cart?.length) {
       handleSaveOrder();
     }
-  }, [session?.user, cart?.length]);
+  }, [session?.user, cart?.length, handleSaveOrder]);
   return (
     <div>
       {loading ? (
@@ -72,11 +73,10 @@ const SuccessContainer = ({ id }: Props) => {
               <div className="relative">
                 <HiCheckCircle className="mx-auto h-24 w-24 text-green-500" />
               </div>
-              
             </div>
             <h2 className="mt-6 text-3xl font-extrabold text-gray-900">
-                Success!
-              </h2>
+              Success!
+            </h2>
           </div>
         </div>
       )}

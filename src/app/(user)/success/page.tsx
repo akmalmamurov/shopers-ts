@@ -2,12 +2,11 @@ import SuccessContainer from "@/components/SuccessContainer";
 import { redirect } from "next/navigation";
 
 interface Props {
-  searchParams: {
-    session_id: string | null;
-  };
+  params: { slug: string };
+  searchParams: { session_id?: string };
 }
-const SuccessPage =  ({ searchParams }: Props) => {
-  const id =  searchParams?.session_id;
+const SuccessPage = ({ searchParams }: Props) => {
+  const id = searchParams?.session_id ?? null;
   if (!id) {
     redirect("/");
   }
