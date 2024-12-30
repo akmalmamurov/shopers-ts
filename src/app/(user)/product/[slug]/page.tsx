@@ -8,12 +8,13 @@ import FormattedPrice from "@/components/FormattedPrice";
 import { MdStar } from "react-icons/md";
 import AddToCartButton from "@/components/AddToCartButton";
 
-interface Props {
-  params: Promise<{ slug: string }>;
-}
+type Props = {
+  params: {
+    slug: string;
+  };
+};
 const SingleProductPage = async ({ params }: Props) => {
-  const resolvedParams = await params;
-  const { slug } = resolvedParams;
+  const { slug } = params;
   const product: ProductData = await getProductId(slug);
   const bestSellersData: ProductData[] = await getBestSellersData();
 
