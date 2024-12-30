@@ -8,8 +8,10 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import FormattedPrice from "./FormattedPrice";
 import Button from "./Button";
+import { useEffect, useState } from "react";
 const CartContainer = ({ session }: any) => {
   const { cart } = useSelector((state: StoreState) => state?.shoppers);
+  const [totalAmt, setTotalAmt] = useState(0);
   const dispatch = useDispatch();
   const handleResetCart = () => {
     const confirmed = window.confirm("Are you sure you want to reset cart?");
@@ -32,6 +34,14 @@ const CartContainer = ({ session }: any) => {
       window.location.href = url;
     }
   };
+  useEffect(() => {
+      let price = 0;
+      cart.map((item)=>{
+        price += item.price * item.quantity;
+        return price
+      })
+      setTotalAmt(price)
+  },[cart])
   return (
     <div>
       {cart?.length > 0 ? (
@@ -58,13 +68,13 @@ const CartContainer = ({ session }: any) => {
               <h1 className="text-2xl font-semibold text-right">Cart totals</h1>
               <div>
                 <p className="flex items-center justify-between border border-gray-400 border-b-0 px-4 text-lg font-medium">
-                  Subtotal <FormattedPrice amount={250} />
+                  Subtotal <FormattedPrice amount={totalAmt} />
                 </p>
                 <p className="flex items-center justify-between border border-gray-400 border-b-0 px-4 text-lg font-medium">
-                  Shipping Charge <FormattedPrice amount={250} />
+                  Shipping Charge <FormattedPrice amount={0} />
                 </p>
                 <p className="flex items-center justify-between border border-gray-400 px-4 text-lg font-medium">
-                  Total <FormattedPrice amount={250} />
+                  Total <FormattedPrice amount={totalAmt} />
                 </p>
               </div>
               <Button

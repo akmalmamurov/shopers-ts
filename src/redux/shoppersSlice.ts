@@ -14,7 +14,7 @@ interface InitialState {
 const initialState: InitialState = {
   cart: [],
   wishList: [],
-  userInfo:  null,
+  userInfo: null,
 };
 
 export const shoppersSlice = createSlice({
@@ -60,7 +60,7 @@ export const shoppersSlice = createSlice({
         (item) => item._id === action.payload._id
       );
       console.log(existingProduct);
-      
+
       state.wishList.push(action.payload);
     },
     resetWishList: (state) => {
