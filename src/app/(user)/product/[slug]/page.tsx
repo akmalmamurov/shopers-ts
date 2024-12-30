@@ -9,12 +9,11 @@ import { MdStar } from "react-icons/md";
 import AddToCartButton from "@/components/AddToCartButton";
 
 interface Props {
-  params: {
-    slug: string;
-  };
+  params: Promise<{ slug: string }>;
 }
 const SingleProductPage = async ({ params }: Props) => {
-  const { slug } = (params);
+  const resolvedParams = await params;
+  const { slug } = resolvedParams;
   const product: ProductData = await getProductId(slug);
   const bestSellersData: ProductData[] = await getBestSellersData();
 
