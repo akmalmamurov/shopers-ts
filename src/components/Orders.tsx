@@ -33,7 +33,6 @@ interface Order {
 
 const Orders = () => {
   const { data: session } = useSession();
-  // State to track which order is expanded
   const [expandedOrderId, setExpandedOrderId] = useState<string | null>(null);
 
   const toggleDetails = (orderId: string) => {
@@ -63,7 +62,6 @@ const Orders = () => {
       toast.success("deleted action dispatched");
     }
   };
-console.log("ORDERS", orders);
 
   return (
     <div className="flex flex-col gap-y-5 mt-5">
