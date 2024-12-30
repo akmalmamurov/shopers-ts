@@ -1,9 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
 import { resetCart } from "@/redux/shoppersSlice";
 import { StoreState } from "@/type";
 import { useSession } from "next-auth/react";
-import { useCallback, useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "./Loader";
 import {
@@ -34,7 +35,7 @@ const SuccessContainer = ({ id }: Props) => {
     setTotalAmt(price);
   }, [cart]);
 
-  const handleSaveOrder = useCallback(async () => {
+  const handleSaveOrder = async () => {
     try {
       setLoading(true);
       const response = await fetch("/api/saveorder", {
@@ -52,14 +53,14 @@ const SuccessContainer = ({ id }: Props) => {
       const data = await response.json();
       if (data?.success) {
         dispatch(resetCart());
-        toast.success(data?.message)
+        toast.success(data?.message);
       }
     } catch (error) {
       console.error(error);
     } finally {
       setLoading(false);
     }
-  }, [cart, session?.user?.email, id, totalAmt, dispatch]);
+  };
 
   useEffect(() => {
     if (session?.user && cart?.length) {

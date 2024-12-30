@@ -10,17 +10,17 @@ export const POST = async (request: NextRequest) => {
       items: cart || [],
     };
     if (cart.length) {
-      const useOrderRef = adminDB
+      const useOrdersRef = adminDB
         .collection("users")
         .doc("email")
         .collection("orders")
         .doc(id);
 
-      const userDoc = await useOrderRef.get();
+      const userDoc = await useOrdersRef.get();
       if (!userDoc.exists) {
-        await useOrderRef.set({ email });
+        await useOrdersRef.set({ email });
       }
-      await useOrderRef.set({ value: orderItem }, { merge: true });
+      await useOrdersRef.set({ value: orderItem }, { merge: true });
 
       return NextResponse.json(
         {
