@@ -14,7 +14,7 @@ interface Props {
   };
 }
 const SingleProductPage = async ({ params }: Props) => {
-  const { slug } = await Promise.resolve(params);
+  const { slug } = (params);
   const product: ProductData = await getProductId(slug);
   const bestSellersData: ProductData[] = await getBestSellersData();
 
