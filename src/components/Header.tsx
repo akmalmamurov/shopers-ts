@@ -1,39 +1,62 @@
-import { navbarList } from "@/data";
-import Container from "./Container";
-import Logo from "./Logo";
-import SearchInput from "./SearchInput";
 import Link from "next/link";
 import { HiMenuAlt2 } from "react-icons/hi";
+import SearchInput from "./SearchInput";
+import Logo from "./Logo";
+import { navbarList } from "@/data";
+import { getSession } from "@/lib/manageSession";
 
 const Header = async () => {
-  return (
-    <header className="w-full h-20 bg-accentWhite border-b border-lightText/50 sticky z-50 top-0">
-      <Container className="h-full flex items-center justify-between gap-5 lg:gap-10">
-        {/* logo */}
-        <Logo />
+  const session = await getSession();
 
-        {/* search input */}
+  return (
+    <header className="w-full h-20 bg-white border-b-[1px] border-lightText/20 sticky top-0 z-50">
+      <div className="h-full max-w-screen-xl mx-auto px-4 flex items-center justify-between gap-5 lg:gap-10">
+        <Logo />
         <SearchInput />
-        {/* navbar list */}
         <div className="hidden md:inline-flex items-center gap-7">
-          {navbarList?.map((item) => (
-            <Link className="navbarItem" href={item.link} key={item.title}>
-              {item.title}
+          {navbarList.map((item) => (
+            <Link
+              href={item?.link}
+              key={item?.link}
+              className="text-base font-semibold hover:text-darkOrange duration-300"
+            >
+              {item?.title}
             </Link>
           ))}
-
-          <Link className="navbarItem" href="/signin">
-            Sign in
-          </Link>
-          <Link className="navbarItem" href="/orders">
-            Orders
-          </Link>
-          <Link className="navbarItem" href="/studio">
-            Studio
-          </Link>
+          {session ? (
+            <Link
+              href={"/dashboard"}
+              className="text-base font-semibold hover:text-darkOrange duration-300"
+            >
+              Dashboard
+            </Link>
+          ) : (
+            <Link
+              href={"/signin"}
+              className="text-base font-semibold hover:text-darkOrange duration-300"
+            >
+              Sign in
+            </Link>
+          )}
+          {session?.user?.email === process.env.ADMIN_EMAIL && (
+            <Link
+              href={"/studio"}
+              className="text-base font-semibold hover:text-darkOrange duration-300"
+            >
+              Studio
+            </Link>
+          )}
+          {session?.user && (
+            <Link
+              href={"/orders"}
+              className="text-base font-semibold hover:text-darkOrange duration-300"
+            >
+              Orders
+            </Link>
+          )}
         </div>
-        <HiMenuAlt2 className="inline-flex md:hidden cursor-pointer text-2xl hoverEffect hover:text-darkOrange" />
-      </Container>
+        <HiMenuAlt2 className="inline-flex md:hidden cursor-pointer w-8 h-6" />
+      </div>
     </header>
   );
 };
